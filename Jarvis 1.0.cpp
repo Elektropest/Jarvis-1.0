@@ -74,5 +74,5 @@ void loop()
     }
     lastRead = digitalRead(11);
   }
-  Serial.println(analogRead(0));
+  Serial.println();
 }
