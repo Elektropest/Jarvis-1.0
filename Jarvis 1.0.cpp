@@ -33,6 +33,16 @@ void loop()
 
   //ymotor
   ymotor.write(map(analogRead(0), 0, 1023, 70, 10));
+  if(analogRead(0) > 550 || analogRead(0) < 450)
+  {
+    analogWrite(A2, 0);
+    analogWrite(A3, 255);
+  }
+  else
+  {
+    analogWrite(A2, 255);
+    analogWrite(A3, 0);
+  }
 
   //zmotor
   if(digitalRead(11) != lastRead)
@@ -47,6 +57,8 @@ void loop()
           delay(15);
         }
         zstate = LOW;
+        analogWrite(A4, 0);
+        analogWrite(A5, 255);
       }
       else
       {
@@ -55,11 +67,12 @@ void loop()
           zmotor.write(i);
           delay(15);
           zstate = HIGH;
+          analogWrite(A4, 255);
+          analogWrite(A5, 0);
         }
       }
     }
     lastRead = digitalRead(11);
   }
-
-  Serial.println();
+  Serial.println(analogRead(0));
 }
