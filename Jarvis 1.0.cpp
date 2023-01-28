@@ -1,4 +1,4 @@
-//Developed by Elektropest.hu
+//Developed by Elektropest
 
 #include <Stepper.h>
 #include <Servo.h>
@@ -22,19 +22,17 @@ void setup()
 void loop()
 {
   //xmotor
-  if(analogRead(1) < 500)
+  if(analogRead(1) < 450)
   {
     xmotor.step(-1);
-    xmotor.setSpeed(map(analogRead(1), 500, 0, 10, 150));
   }
-  else if(analogRead(1) > 510)
+  else if(analogRead(1) > 550)
   {
     xmotor.step(1);
-    xmotor.setSpeed(map(analogRead(1), 510, 1023, 10, 150));
   }
 
   //ymotor
-  ymotor.write(map(analogRead(0), 0, 1023, 80, 10));
+  ymotor.write(map(analogRead(0), 0, 1023, 70, 10));
 
   //zmotor
   if(digitalRead(11) != lastRead)
@@ -43,7 +41,7 @@ void loop()
     {
       if(zstate == HIGH)
       {
-        for (int i = 0; i <= 180; i++)
+        for (int i = 0; i <= 170; i++)
         {
           zmotor.write(i);
           delay(15);
@@ -52,7 +50,7 @@ void loop()
       }
       else
       {
-        for (int i = 180; i >= 0; i--)
+        for (int i = 170; i >= 0; i--)
         {
           zmotor.write(i);
           delay(15);
@@ -63,5 +61,5 @@ void loop()
     lastRead = digitalRead(11);
   }
 
-  Serial.println(digitalRead(11));
+  Serial.println();
 }
